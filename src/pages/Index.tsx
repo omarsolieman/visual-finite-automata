@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
 import { AutomataCanvas } from '@/components/AutomataCanvas';
 import { Toolbar } from '@/components/Toolbar';
+import { ConversionView } from '@/components/ConversionView';
 import { State, Transition, Position, Tool, Automaton } from '@/types/automata';
+import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 const Index = () => {
@@ -14,6 +16,7 @@ const Index = () => {
   const [activeTool, setActiveTool] = useState<Tool>('select');
   const [nextStateId, setNextStateId] = useState(0);
   const [nextTransitionId, setNextTransitionId] = useState(0);
+  const [showConversion, setShowConversion] = useState(false);
 
   const handleStateAdd = useCallback((position: Position) => {
     const newState: State = {
@@ -103,10 +106,13 @@ const Index = () => {
       return;
     }
     
-    // Basic conversion logic placeholder
-    const newType = automaton.type === 'NFA' ? 'DFA' : 'NFA';
-    setAutomaton(prev => ({ ...prev, type: newType }));
-    toast.success(`Converted to ${newType}`);
+    if (automaton.type === 'NFA') {
+      setShowConversion(true);
+    } else {
+      // Simple toggle for now
+      setAutomaton(prev => ({ ...prev, type: 'NFA' }));
+      toast.success('Converted to NFA');
+    }
   }, [automaton.type, automaton.states.length]);
 
   const handleValidate = useCallback(() => {
@@ -202,6 +208,15 @@ const Index = () => {
     }));
   }, []);
 
+  if (showConversion) {
+    return (
+      <ConversionView 
+        nfa={automaton} 
+        onBack={() => setShowConversion(false)} 
+      />
+    );
+  }
+
   return (
     <div className="h-screen bg-background flex overflow-hidden">
       {/* Sidebar */}
@@ -240,6 +255,30 @@ const Index = () => {
                 {automaton.alphabet.length > 0 ? `{${automaton.alphabet.join(', ')}}` : '∅'}
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Final States Panel */}
+        <div className="mt-4 p-4 bg-card rounded-lg border border-border">
+          <h3 className="font-semibold mb-2 text-sm">Final States</h3>
+          <div className="space-y-2">
+            {automaton.states.length === 0 ? (
+              <p className="text-xs text-muted-foreground">No states available</p>
+            ) : (
+              automaton.states.map(state => (
+                <div key={state.id} className="flex items-center justify-between">
+                  <span className="text-xs font-mono">{state.label}</span>
+                  <Button
+                    size="sm"
+                    variant={state.isAccepting ? "default" : "outline"}
+                    className="h-6 px-2 text-xs"
+                    onClick={() => toggleStateProperty(state.id, 'isAccepting')}
+                  >
+                    {state.isAccepting ? "Final" : "Set Final"}
+                  </Button>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

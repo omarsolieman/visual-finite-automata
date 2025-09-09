@@ -104,11 +104,18 @@ export const AutomataCanvas = ({
         }}
       >
         {/* Render transitions first (behind states) */}
-        {transitions.map((transition) => {
+        {transitions.map((transition, index) => {
           const fromState = states.find(s => s.id === transition.from);
           const toState = states.find(s => s.id === transition.to);
           
           if (!fromState || !toState) return null;
+          
+          // Check for bidirectional transitions to make them curved
+          const reverseTransition = transitions.find(t => 
+            t.from === transition.to && t.to === transition.from && t.id !== transition.id
+          );
+          const isCurved = !!reverseTransition;
+          const curveOffset = isCurved ? (index % 2 === 0 ? 40 : -40) : 0;
           
           return (
             <TransitionEdge
@@ -119,6 +126,8 @@ export const AutomataCanvas = ({
               onSelect={() => onStateSelect(transition.id)}
               onDelete={() => onDelete(transition.id, 'transition')}
               canDelete={activeTool === 'delete'}
+              isCurved={isCurved}
+              curveOffset={curveOffset}
             />
           );
         })}
