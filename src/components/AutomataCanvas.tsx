@@ -110,13 +110,27 @@ export const AutomataCanvas = ({
           
           if (!fromState || !toState) return null;
           
-          // Check for bidirectional transitions to make them curved
-          const reverseTransition = transitions.find(t => 
-            t.from === transition.to && t.to === transition.from && t.id !== transition.id
-          );
-          const isCurved = !!reverseTransition;
-          const curveOffset = isCurved ? (index % 2 === 0 ? 40 : -40) : 0;
-          
+          // Find all transitions in the same direction (from->to)
+          const sameDirection = transitions.filter(t => t.from === transition.from && t.to === transition.to);
+          // Find all transitions in the reverse direction (to->from)
+          const reverseDirection = transitions.filter(t => t.from === transition.to && t.to === transition.from);
+
+          // If there are multiple transitions in the same direction, offset each one
+          let isCurved = false;
+          let curveOffset = 0;
+          if (sameDirection.length > 1 || reverseDirection.length > 0) {
+            isCurved = true;
+            // Offset each transition in the same direction by its index
+            const idx = sameDirection.findIndex(t => t.id === transition.id);
+            // Spread out curves: e.g. -40, 0, +40 for 3 transitions
+            const spread = 40;
+            const total = sameDirection.length;
+            curveOffset = (idx - (total - 1) / 2) * spread;
+            // For reverse direction, flip the sign
+            if (reverseDirection.length > 0 && transition.from > transition.to) {
+              curveOffset = -curveOffset;
+            }
+          }
           return (
             <TransitionEdge
               key={transition.id}
