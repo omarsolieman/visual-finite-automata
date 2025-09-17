@@ -1,73 +1,106 @@
-# Welcome to your Lovable project
+# Visual Finite Automata
 
-## Project info
+![Build](https://img.shields.io/github/actions/workflow/status/omarsolieman/visual-finite-automata/build.yml?branch=main)
+![License](https://img.shields.io/github/license/omarsolieman/visual-finite-automata)
+![Stars](https://img.shields.io/github/stars/omarsolieman/visual-finite-automata?style=social)
 
-**URL**: https://lovable.dev/projects/a2d0df28-15aa-4f94-b21b-354bd57a8672
+Visual Finite Automata is an open-source project designed to help users visualize and interact with Non-deterministic Finite Automata (NFA) and Deterministic Finite Automata (DFA). This tool is ideal for students, educators, and professionals working with automata theory.
 
-## How can I edit this code?
+## Demo
 
-There are several ways of editing your application.
+Check out the live demo: [Visual Finite Automata Demo](https://visual-finite-automata.vercel.app)
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a2d0df28-15aa-4f94-b21b-354bd57a8672) and start prompting.
+- Visualize NFA and DFA with interactive state diagrams.
+- Add, edit, and delete states and transitions.
+- Support for epsilon transitions.
+- Curved arrows for bidirectional transitions.
+- Export automata diagrams.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite**: Fast build tool for modern web applications.
+- **TypeScript**: Strongly typed programming language.
+- **React**: Library for building user interfaces.
+- **shadcn-ui**: Component library.
+- **Tailwind CSS**: Utility-first CSS framework.
 
-## How can I deploy this project?
+## Getting Started
 
-Simply open [Lovable](https://lovable.dev/projects/a2d0df28-15aa-4f94-b21b-354bd57a8672) and click on Share -> Publish.
+Follow these steps to set up the project locally:
 
-## Can I connect a custom domain to my Lovable project?
+### Prerequisites
 
-Yes, you can!
+Ensure you have the following installed:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Node.js (v16 or higher)
+- npm (v7 or higher)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/omarsolieman/visual-finite-automata.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```sh
+   cd visual-finite-automata
+   ```
+
+3. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```sh
+   npm run dev
+   ```
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix:
+
+   ```sh
+   git checkout -b feature-name
+   ```
+
+3. Commit your changes:
+
+   ```sh
+   git commit -m "Add feature description"
+   ```
+
+4. Push to your fork:
+
+   ```sh
+   git push origin feature-name
+   ```
+
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or feedback, feel free to reach out:
+
+- **Author**: Omar Solieman
+- **GitHub**: [omarsolieman](https://github.com/omarsolieman)
+
+---
+
+Thank you for using Visual Finite Automata! If you find this project helpful, consider giving it a star on GitHub.
